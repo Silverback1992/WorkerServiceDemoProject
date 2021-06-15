@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WorkerServiceDemoProject.Models;
 
 namespace WorkerServiceDemoProject
 {
@@ -32,13 +33,11 @@ namespace WorkerServiceDemoProject
                 var result = await client.GetAsync("http://www.google.com/");
 
                 if (result.IsSuccessStatusCode)
-                    _logger.LogInformation($"Google is working. Status code: {result.StatusCode}");
+                    Utility.Log("Website is running.", "Info");
                 else
-                {
-                    
-                }
+                    Utility.Log("Google is down, run for your lives.", "Error");
 
-                await Task.Delay(60*1000, stoppingToken);
+                await Task.Delay(5000, stoppingToken);
             }
         }
     }
