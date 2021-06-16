@@ -22,6 +22,7 @@ namespace WorkerServiceDemoProject
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
+            Utility.Log("Starting GoogleCheck service.", "Info");
             client = new HttpClient();
             return base.StartAsync(cancellationToken);  
         }
@@ -39,6 +40,12 @@ namespace WorkerServiceDemoProject
 
                 await Task.Delay(5000, stoppingToken);
             }
+        }
+
+        public override Task StopAsync(CancellationToken cancellationToken)
+        {
+            Utility.Log("Stopped GoogleCheck service.", "Info");
+            return base.StopAsync(cancellationToken);   
         }
     }
 }
