@@ -12,11 +12,16 @@ namespace WorkerServiceDemoProject
         public static string ConnectionString { get => _connectionString; }
         static ConfigManager()
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false);
+            //Looks like you can have your config file on Mars and still make this work
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json", optional: false);
 
-            IConfiguration config = builder.Build();
+            //IConfiguration config = builder.Build();
+
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
 
             _connectionString = config.GetSection("ConnectionStrings").GetSection("DefaultConnectionString").Value;
         }
